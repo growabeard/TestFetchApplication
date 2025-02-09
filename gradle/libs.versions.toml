@@ -10,7 +10,6 @@ activityCompose = "1.10.0"
 composeBom = "2025.01.01"
 mockitoAndroid = "5.15.2"
 mockitoCore = "5.15.2"
-mockitoKotlinVersion = "5.4.0"
 coroutines = "1.10.1"
 retrofit = "2.11.0"
 composeFoundation = "1.7.7"
@@ -31,7 +30,6 @@ androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-toolin
 androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
-kotlin-mockito-kotlin = { module = "org.mockito.kotlin:mockito-kotlin", version.ref = "mockitoKotlinVersion" }
 mockito-android = { module = "org.mockito:mockito-android", version.ref = "mockitoAndroid" }
 mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockitoCore" }
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
