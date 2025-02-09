@@ -80,7 +80,7 @@ fun ItemListView(listScreenState: State<ItemListState>, onListSelected: (Int) ->
                             .fillMaxWidth()
                             .background(MaterialTheme.colorScheme.secondary)
                     ) {
-                        Text("List Contents", textAlign = TextAlign.Center)
+                        Text(color = MaterialTheme.colorScheme.onSecondary, text = "List Contents - ${listStateValue.selectedList.size} items", textAlign = TextAlign.Center)
                     }
                 }
                 items(listStateValue.selectedList) {
