@@ -1,5 +1,6 @@
 package com.witt.fetchapplication.ui.screens
 
+import androidx.annotation.OpenForTesting
 import androidx.compose.runtime.mutableStateMapOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -14,10 +15,20 @@ class ItemListViewModel : ViewModel() {
 
     fun getItemList() {
         viewModelScope.launch {
-            val listResult = ListApi.retrofitService.getItemList().filter { item -> item.name != null && item.name != "" }
-            val groupedList = listResult.groupBy { it.listId }.mapValues { list -> list.value.sortedBy { it.name } }
+            val listResult = ListApi.retrofitService.getItemList()
             _itemMap.clear()
-            _itemMap.putAll(groupedList)
+            _itemMap.putAll(formatItemList(listResult))
         }
+    }
+
+    @OpenForTesting
+    fun formatItemList(list: List<Item>): Map<Int, List<Item>> {
+        val listWithNames = list.filter { item -> item.name != null && item.name != "" }
+        val groupedList = listWithNames.groupBy { it.listId }
+        return groupedList.mapValues { list -> list.value.sortedWith(compareBy {
+           it.name?.filter {
+               char -> char.isDigit()
+           }?.toInt()
+        })}
     }
 }
