@@ -23,7 +23,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             LaunchedEffect(Unit, block = {
-              itemListViewModel.getItemList()
+                itemListViewModel.getItemList()
             })
 
             FetchApplicationTheme {

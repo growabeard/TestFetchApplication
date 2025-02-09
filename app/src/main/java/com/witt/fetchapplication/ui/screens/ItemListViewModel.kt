@@ -42,10 +42,12 @@ class ItemListViewModel : ViewModel() {
     fun formatItemList(originalList: List<Item>): Map<Int, List<Item>> {
         val listWithNames = originalList.filter { item -> item.name != null && item.name != "" }
         val groupedList = listWithNames.groupBy { it.listId }
-        return groupedList.mapValues { list -> list.value.sortedWith(compareBy {
-           it.name?.filter {
-               char -> char.isDigit()
-           }?.toInt()
-        })}
+        return groupedList.mapValues { list ->
+            list.value.sortedWith(compareBy {
+                it.name?.filter { char ->
+                    char.isDigit()
+                }?.toInt()
+            })
+        }
     }
 }

@@ -37,9 +37,13 @@ import kotlinx.coroutines.flow.MutableStateFlow
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun ItemListView(listScreenState: State<ItemListState>, onListSelected: (Int) -> Unit, modifier: Modifier = Modifier) {
+fun ItemListView(
+    listScreenState: State<ItemListState>,
+    onListSelected: (Int) -> Unit,
+    modifier: Modifier = Modifier
+) {
     val listStateValue = listScreenState.value
-    Column (modifier) {
+    Column(modifier) {
         if (listStateValue.isLoading) {
             LinearProgressIndicator(
                 modifier = Modifier.fillMaxWidth(),
@@ -60,7 +64,8 @@ fun ItemListView(listScreenState: State<ItemListState>, onListSelected: (Int) ->
                         ),
                         border = BorderStroke(1.dp, Color.Black),
                         modifier = Modifier
-                            .size(width = 240.dp, height = 50.dp).padding(horizontal = 5.dp),
+                            .size(width = 240.dp, height = 50.dp)
+                            .padding(horizontal = 5.dp),
                         onClick = { onListSelected(listKey) }
                     ) {
                         Column(
@@ -80,7 +85,11 @@ fun ItemListView(listScreenState: State<ItemListState>, onListSelected: (Int) ->
                             .fillMaxWidth()
                             .background(MaterialTheme.colorScheme.secondary)
                     ) {
-                        Text(color = MaterialTheme.colorScheme.onSecondary, text = "List Contents - ${listStateValue.selectedList.size} items", textAlign = TextAlign.Center)
+                        Text(
+                            color = MaterialTheme.colorScheme.onSecondary,
+                            text = "List Contents - ${listStateValue.selectedList.size} items",
+                            textAlign = TextAlign.Center
+                        )
                     }
                 }
                 items(listStateValue.selectedList) {
@@ -116,15 +125,28 @@ fun ItemListView(listScreenState: State<ItemListState>, onListSelected: (Int) ->
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun ItemListPreview() {
-    val sampleMap = mapOf(Pair(1, listOf(
-        Item(1, 1, "Item 1"),
-        Item(2, 1, "Item 2"),
-        Item(3, 1, "Item 3")
-    )),
-    Pair(2, listOf(
-        Item(1, 2, "Item 1")
-    )))
-    val listState = MutableStateFlow(ItemListState(false, sampleMap.keys.toList(), sampleMap[1]!!, 1)).collectAsState()
+    val sampleMap = mapOf(
+        Pair(
+            1, listOf(
+                Item(1, 1, "Item 1"),
+                Item(2, 1, "Item 2"),
+                Item(3, 1, "Item 3")
+            )
+        ),
+        Pair(
+            2, listOf(
+                Item(1, 2, "Item 1")
+            )
+        )
+    )
+    val listState = MutableStateFlow(
+        ItemListState(
+            false,
+            sampleMap.keys.toList(),
+            sampleMap[1]!!,
+            1
+        )
+    ).collectAsState()
     FetchApplicationTheme {
         ItemListView(listState, {})
     }
@@ -133,15 +155,28 @@ fun ItemListPreview() {
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun InitialItemListPreview() {
-    val sampleMap = mapOf(Pair(1, listOf(
-        Item(1, 1, "Item 1"),
-        Item(2, 1, "Item 2"),
-        Item(3, 1, "Item 3")
-    )),
-        Pair(2, listOf(
-            Item(1, 2, "Item 1")
-        )))
-    val listState = MutableStateFlow(ItemListState(false, sampleMap.keys.toList(), emptyList(), -1)).collectAsState()
+    val sampleMap = mapOf(
+        Pair(
+            1, listOf(
+                Item(1, 1, "Item 1"),
+                Item(2, 1, "Item 2"),
+                Item(3, 1, "Item 3")
+            )
+        ),
+        Pair(
+            2, listOf(
+                Item(1, 2, "Item 1")
+            )
+        )
+    )
+    val listState = MutableStateFlow(
+        ItemListState(
+            false,
+            sampleMap.keys.toList(),
+            emptyList(),
+            -1
+        )
+    ).collectAsState()
     FetchApplicationTheme {
         ItemListView(listState, {})
     }
@@ -150,7 +185,8 @@ fun InitialItemListPreview() {
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun LoadingItemListPreview() {
-    val listState = MutableStateFlow(ItemListState(true, emptyList(), emptyList(), -1)).collectAsState()
+    val listState =
+        MutableStateFlow(ItemListState(true, emptyList(), emptyList(), -1)).collectAsState()
     FetchApplicationTheme {
         ItemListView(listState, {})
     }
