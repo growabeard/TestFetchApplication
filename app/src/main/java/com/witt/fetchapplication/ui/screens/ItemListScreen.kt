@@ -8,10 +8,12 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.witt.fetchapplication.network.data.Item
@@ -32,11 +34,13 @@ fun ItemListView(map: Map<Int, List<Item>>, modifier: Modifier = Modifier) {
                     Row {
                         Column {
                             valueList.forEach { value ->
-                                ItemRow(
-                                    id = value.id.toString(),
-                                    listId = value.listId.toString(),
-                                    name = value.name!!
-                                )
+                                Card(modifier = Modifier.padding(horizontal = 5.dp, vertical = 2.dp)) {
+                                    ItemRow(
+                                        id = value.id.toString(),
+                                        listId = value.listId.toString(),
+                                        name = value.name!!
+                                    )
+                                }
                             }
                         }
                     }
@@ -48,12 +52,13 @@ fun ItemListView(map: Map<Int, List<Item>>, modifier: Modifier = Modifier) {
 
 @Composable
 fun ItemRow(id: String, listId: String, name: String) {
-    Row {
-        Text (modifier = Modifier.weight(2f),
+    Row(modifier = Modifier.padding(5.dp)) {
+        Text (modifier = Modifier.weight(2f).padding(start = 10.dp),
             text = id)
         Text (modifier = Modifier.weight(1f),
             text = listId)
-        Text (modifier = Modifier.weight(3f),
+        Text (modifier = Modifier.weight(3f).padding(end = 10.dp),
+            textAlign = TextAlign.End,
             text = name)
     }
 }
