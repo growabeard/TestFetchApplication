@@ -7,8 +7,10 @@ import retrofit2.http.GET
 
 private const val BASE_URL = "https://fetch-hiring.s3.amazonaws.com"
 
-private val retrofit = Retrofit.Builder().addConverterFactory(GsonConverterFactory.create()).baseUrl(
-    BASE_URL).build()
+private val retrofit =
+    Retrofit.Builder().addConverterFactory(GsonConverterFactory.create()).baseUrl(
+        BASE_URL
+    ).build()
 
 interface ListApiService {
     @GET("/hiring.json")

@@ -22,13 +22,15 @@ class ItemListViewModel : ViewModel() {
     }
 
     @OpenForTesting
-    fun formatItemList(list: List<Item>): Map<Int, List<Item>> {
-        val listWithNames = list.filter { item -> item.name != null && item.name != "" }
+    fun formatItemList(rawList: List<Item>): Map<Int, List<Item>> {
+        val listWithNames = rawList.filter { item -> item.name != null && item.name != "" }
         val groupedList = listWithNames.groupBy { it.listId }
-        return groupedList.mapValues { list -> list.value.sortedWith(compareBy {
-           it.name?.filter {
-               char -> char.isDigit()
-           }?.toInt()
-        })}
+        return groupedList.mapValues { list ->
+            list.value.sortedWith(compareBy {
+                it.name?.filter { char ->
+                    char.isDigit()
+                }?.toInt()
+            })
+        }
     }
 }

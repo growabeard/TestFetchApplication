@@ -25,7 +25,9 @@ fun ItemListView(map: Map<Int, List<Item>>, modifier: Modifier = Modifier) {
     Column(modifier = modifier.padding(horizontal = 10.dp)) {
         LazyColumn {
             stickyHeader {
-                Box(modifier = Modifier.fillMaxWidth().background(Color.DarkGray)) {
+                Box(modifier = Modifier
+                    .fillMaxWidth()
+                    .background(Color.DarkGray)) {
                     ItemRow("ID", "List ID", "Name")
                 }
             }
@@ -34,7 +36,12 @@ fun ItemListView(map: Map<Int, List<Item>>, modifier: Modifier = Modifier) {
                     Row {
                         Column {
                             valueList.forEach { value ->
-                                Card(modifier = Modifier.padding(horizontal = 5.dp, vertical = 2.dp)) {
+                                Card(
+                                    modifier = Modifier.padding(
+                                        horizontal = 5.dp,
+                                        vertical = 2.dp
+                                    )
+                                ) {
                                     ItemRow(
                                         id = value.id.toString(),
                                         listId = value.listId.toString(),
@@ -53,13 +60,23 @@ fun ItemListView(map: Map<Int, List<Item>>, modifier: Modifier = Modifier) {
 @Composable
 fun ItemRow(id: String, listId: String, name: String) {
     Row(modifier = Modifier.padding(5.dp)) {
-        Text (modifier = Modifier.weight(2f).padding(start = 10.dp),
-            text = id)
-        Text (modifier = Modifier.weight(1f),
-            text = listId)
-        Text (modifier = Modifier.weight(3f).padding(end = 10.dp),
+        Text(
+            modifier = Modifier
+                .weight(2f)
+                .padding(start = 10.dp),
+            text = id
+        )
+        Text(
+            modifier = Modifier.weight(1f),
+            text = listId
+        )
+        Text(
+            modifier = Modifier
+                .weight(3f)
+                .padding(end = 10.dp),
             textAlign = TextAlign.End,
-            text = name)
+            text = name
+        )
     }
 }
 
